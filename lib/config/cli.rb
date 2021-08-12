@@ -9,7 +9,8 @@ class Cli
         # parse_by_space_sort_2
         # parse_by_space_sort_3
         # parse_by_pipe_sort_1
-        parse_by_pipe_sort_2
+        # parse_by_pipe_sort_2
+        parse_by_pipe_sort_3
     end
 
     def parse_by_comma_sort_1
@@ -139,10 +140,27 @@ class Cli
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
         puts "---------------------------------------------"
-        puts "Output 1  (parse by pipe)"
+        puts "Output 2  (parse by pipe)"
         puts ""
         puts output_data
         puts "---------------------------------------------"
     end
+
+    def parse_by_pipe_sort_3
+        file = File.open("lib/config/pipe.txt")
+        file_input = file.read 
+        parsed_input = file_input.split("| ").join(" ").split("\n")
+        parsed_input_array = parsed_input.map {|i| i.split(" ")}
+        reorder = parsed_input_array.each {|e| [e.slice!(2), e.push(e.slice!(3))]}
+        formatted_data = reorder.each {|e| e[3] = e[3].split("-").join("/")}
+        sorted_data = formatted_data.sort_by {|e| e[0]}.reverse
+        parsed_data = sorted_data.map {|e| e.join(" ")}
+        output_data = parsed_data.join("\n")
+        puts "---------------------------------------------"
+        puts "Output 3  (parse by pipe)"
+        puts ""
+        puts output_data
+        puts "---------------------------------------------"
+    end 
 
 end
