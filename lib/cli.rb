@@ -89,14 +89,19 @@ class Cli
         return reorder
     end
 
-    def sort_by_gender_then_last_name(data)
+    def format_data(data)
         formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
             if e[2] == "M"
                 e[2] = "Male"
             elsif e[2] == "F"
                 e[2] = "Female"
             end
-            ]} 
+        ]}
+        return formatted_data 
+    end
+
+    def sort_by_gender_then_last_name(data)
+        formatted_data = format_data(data)
         sorted_data = formatted_data.sort_by {|e| [e[2], e[0]] }
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
@@ -104,13 +109,7 @@ class Cli
     end
 
     def sort_by_dob_then_last_name(data)
-        formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
-            if e[2] == "M"
-                e[2] = "Male"
-            elsif e[2] == "F"
-                e[2] = "Female"
-            end
-            ]} 
+        formatted_data = format_data(data)
         sorted_data = formatted_data.sort_by {|e| [e[3].split("/")[2].to_i, e[0]] }
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
@@ -118,13 +117,7 @@ class Cli
     end
 
     def sort_by_last_name_descending(data)
-        formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
-            if e[2] == "M"
-                e[2] = "Male"
-            elsif e[2] == "F"
-                e[2] = "Female"
-            end
-            ]} 
+        formatted_data = format_data(data)
         sorted_data = formatted_data.sort_by {|e| e[0]}.reverse
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
