@@ -2,20 +2,56 @@
 class Cli
 
     def start
-        sort1 = "sort_by_gender_then_last_name"
-        sort2 = "sort_by_dob_then_last_name"
-        sort3 = "sort_by_last_name_descending"
-        parse("space", sort3)
+        puts "--------------------------------------------------"
+        puts "Which delimiter is your data separated by?"
+        puts "--------------------------------------------------"
+        delimiter_options
+    end
+
+    def get_input
+        print "Enter option: "
+        gets.chomp
+    end
+    
+    def delimiter_options 
+        puts "Press '1' for 'comma.'"
+        puts "Press '2' for 'space.'"
+        puts "Press '3' for 'pipe.'"
+        puts "Type 'exit' to leave the program."
+        delimiter_menu
+    end
+
+    def delimiter_menu
+        @delimiter = get_input
+        exit if @delimiter.downcase == "exit"
+        sort_options(@delimiter)
+    end
+
+    def sort_options(delimiter)
+        puts "--------------------------------------------------"
+        puts "How would you like to sort your data?"
+        puts "--------------------------------------------------"
+        puts "Press '1' to sort by gender then by last name."
+        puts "Press '2' to sort by DOB then by last name."
+        puts "Press '3' to sort by last name descending."
+        puts "Type 'exit' to leave the program."
+        sort_menu(delimiter)
+    end
+
+    def sort_menu(delimiter)
+        @sort_method = get_input
+        exit if @sort_method.downcase === 'exit'
+        parse(delimiter, @sort_method)
     end
 
     def parse(delimiter, sort_method)
-        data = parse_comma_data if delimiter === "comma"
-        data = parse_space_data if delimiter === "space"
-        data = parse_pipe_data  if delimiter === "pipe"
+        data = parse_comma_data if delimiter === "1"
+        data = parse_space_data if delimiter === "2"
+        data = parse_pipe_data  if delimiter === "3"
         
-        sort_by_gender_then_last_name(data) if sort_method === "sort_by_gender_then_last_name"
-        sort_by_dob_then_last_name(data) if sort_method === "sort_by_dob_then_last_name"
-        sort_by_last_name_descending(data) if sort_method === "sort_by_last_name_descending" 
+        sort_by_gender_then_last_name(data) if sort_method === "1"
+        sort_by_dob_then_last_name(data) if sort_method === "2"
+        sort_by_last_name_descending(data) if sort_method === "3" 
     end
 
     def parse_comma_data
@@ -76,5 +112,9 @@ class Cli
         puts data
         puts "---------------------------------------------"
     end
-
 end
+
+      # sort1 = "sort_by_gender_then_last_name"
+        # sort2 = "sort_by_dob_then_last_name"
+        # sort3 = "sort_by_last_name_descending"
+        # parse("space", sort3)
