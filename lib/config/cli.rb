@@ -119,6 +119,25 @@ class Cli
         puts ""
         puts data
         puts "---------------------------------------------"
+        puts "Would you like to run again?"
+        end_options
+    end
+
+    def end_options
+        puts "Press '1' for yes."
+        puts "Press '2' for no."
+        end_menu
+    end
+
+    def end_menu
+        input = get_input
+        if input == "1"
+            start
+        elsif input == "2"
+            exit
+        else
+            end_options
+        end
     end
 end
 
