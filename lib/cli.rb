@@ -151,16 +151,3 @@ class Cli
         end
     end
 end
-
-      # sort1 = "sort_by_gender_then_last_name"
-        # sort2 = "sort_by_dob_then_last_name"
-        # sort3 = "sort_by_last_name_descending"
-        # parse("space", sort3)
-
-        # formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
-        #     if e[2] == "M"
-        #         e[2] = "Male"
-        #     elsif e[2] == "F"
-        #         e[2] = "Female"
-        #     end
-        #     ]} 
