@@ -15,8 +15,7 @@ class Cli
         
         sort_by_gender_then_last_name(data) if sort_method === "sort_by_gender_then_last_name"
         sort_by_dob_then_last_name(data) if sort_method === "sort_by_dob_then_last_name"
-        sort_by_last_name_descending(data) if sort_method === "sort_by_last_name_descending"
-       
+        sort_by_last_name_descending(data) if sort_method === "sort_by_last_name_descending" 
     end
 
     def parse_comma_data
