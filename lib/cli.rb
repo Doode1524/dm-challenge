@@ -90,7 +90,13 @@ class Cli
     end
 
     def sort_by_gender_then_last_name(data)
-        formatted_data = data.each {|e| e[3] = e[3].split("-").join("/")} 
+        formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
+            if e[2] == "M"
+                e[2] = "Male"
+            elsif e[2] == "F"
+                e[2] = "Female"
+            end
+            ]} 
         sorted_data = formatted_data.sort_by {|e| [e[2], e[0]] }
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
@@ -98,7 +104,13 @@ class Cli
     end
 
     def sort_by_dob_then_last_name(data)
-        formatted_data = data.each {|e| e[3] = e[3].split("-").join("/")} 
+        formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
+            if e[2] == "M"
+                e[2] = "Male"
+            elsif e[2] == "F"
+                e[2] = "Female"
+            end
+            ]} 
         sorted_data = formatted_data.sort_by {|e| [e[3].split("/")[2].to_i, e[0]] }
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
@@ -106,7 +118,13 @@ class Cli
     end
 
     def sort_by_last_name_descending(data)
-        formatted_data = data.each {|e| e[3] = e[3].split("-").join("/")}
+        formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
+            if e[2] == "M"
+                e[2] = "Male"
+            elsif e[2] == "F"
+                e[2] = "Female"
+            end
+            ]} 
         sorted_data = formatted_data.sort_by {|e| e[0]}.reverse
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
@@ -145,3 +163,11 @@ end
         # sort2 = "sort_by_dob_then_last_name"
         # sort3 = "sort_by_last_name_descending"
         # parse("space", sort3)
+
+        # formatted_data = data.each {|e| [e[3] = e[3].split("-").join("/"), 
+        #     if e[2] == "M"
+        #         e[2] = "Male"
+        #     elsif e[2] == "F"
+        #         e[2] = "Female"
+        #     end
+        #     ]} 
