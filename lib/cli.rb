@@ -63,7 +63,7 @@ class Cli
     end
 
     def parse_comma_data
-        file = File.open("lib/config/comma.txt")
+        file = File.open("lib/comma.txt")
         file_input = file.read
         parsed_input = file_input.split(", ").join(" ").split("\n")
         parsed_input_array = parsed_input.map {|i| i.split(" ")}
@@ -72,7 +72,7 @@ class Cli
     end
 
     def parse_space_data
-        file = File.open("lib/config/space.txt")
+        file = File.open("lib/space.txt")
         file_input = file.read
         parsed_input = file_input.split("\n")
         parsed_input_array = parsed_input.map {|i| i.split(" ")}
@@ -81,7 +81,7 @@ class Cli
     end
 
     def parse_pipe_data
-        file = File.open("lib/config/pipe.txt")
+        file = File.open("lib/pipe.txt")
         file_input = file.read 
         parsed_input = file_input.split("| ").join(" ").split("\n")
         parsed_input_array = parsed_input.map {|i| i.split(" ")}
