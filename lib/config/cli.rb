@@ -24,7 +24,11 @@ class Cli
     def delimiter_menu
         @delimiter = get_input
         exit if @delimiter.downcase == "exit"
-        sort_options(@delimiter)
+        if (@delimiter == "1" || @delimiter == "2" || @delimiter == "3") 
+            sort_options(@delimiter)
+        else
+            delimiter_options
+        end
     end
 
     def sort_options(delimiter)
@@ -41,7 +45,11 @@ class Cli
     def sort_menu(delimiter)
         @sort_method = get_input
         exit if @sort_method.downcase === 'exit'
-        parse(delimiter, @sort_method)
+        if (@sort_method == "1" || @sort_method == "2" || @sort_method == "3") 
+            parse(delimiter, @sort_method)
+        else
+            sort_options(@delimiter)
+        end
     end
 
     def parse(delimiter, sort_method)
