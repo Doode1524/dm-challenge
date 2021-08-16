@@ -21,4 +21,30 @@ RSpec.describe Cli do
         end
     end
 
+    context "parse_space_data" do
+
+        it "has a parse_space_data method" do
+            expect{Cli.new.parse_space_data}.to_not raise_error
+        end
+
+        it "correctly parses data" do
+            expect(Cli.new.parse_space_data).to eq([["Kournikova", "Anna", "F", "6-3-1975", "Red"], 
+                ["Hingis", "Martina", "F", "4-2-1979", "Green"], 
+                ["Seles", "Monica", "F", "12-2-1973", "Black"]])
+        end
+    end
+
+    context "parse_pipe_data" do
+
+        it "has a parse_pipe_data method" do
+            expect{Cli.new.parse_pipe_data}.to_not raise_error
+        end
+
+        it "correctly parses data" do
+            expect(Cli.new.parse_pipe_data).to eq([["Smith", "Steve", "M", "3-3-1985", "Red"], ["Bonk", "Radek", "M", "6-3-1975", "Green"], 
+                ["Bouillon", "Francis", "M", "6-3-1975", "Blue"], 
+                ["Grouillon", "Francis", "F", "6-3-1975", "Blue"]])
+        end
+    end
+
 end
