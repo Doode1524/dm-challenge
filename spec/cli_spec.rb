@@ -1,9 +1,6 @@
 
 RSpec.describe Cli do
-    before do
-        @cli = Cli.new
-    end
-
+    
     context "Cli class" do
         
         it "exists" do
