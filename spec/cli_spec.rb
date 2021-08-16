@@ -47,4 +47,18 @@ RSpec.describe Cli do
         end
     end
 
+    context "format_data" do
+        before do
+            @data = [["Kournikova", "Anna", "F", "6-3-1975", "Red"]]
+        end
+        
+        it "has a format_data method that takes in one argrument" do
+            expect{Cli.new.format_data(@data)}.to_not raise_error
+        end
+
+        it "correctly formats data (full gender name, and proper date format) " do
+            expect(Cli.new.format_data(@data)).to eq([["Kournikova", "Anna", "Female", "6/3/1975", "Red"]])
+        end
+    end
+
 end
