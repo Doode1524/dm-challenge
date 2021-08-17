@@ -73,10 +73,32 @@ RSpec.describe Cli do
                 output_data = parsed_data.join("\n")
                 return output_data
             end
+
+            def sort_by_dob_then_last_name(data)
+                sorted_data = data.sort_by {|e| [e[3].split("/")[2].to_i, e[0]] }
+                parsed_data = sorted_data.map {|e| e.join(" ")}
+                output_data = parsed_data.join("\n")
+                return output_data
+            end
+        
+            def sort_by_last_name_descending(data)
+                sorted_data = data.sort_by {|e| e[0]}.reverse
+                parsed_data = sorted_data.map {|e| e.join(" ")}
+                output_data = parsed_data.join("\n")
+                return output_data
+            end
         end
 
         it "sorts data by gender then by last name" do
             expect(sort_by_gender_then_last_name(@data)).to eq("Grouillon Francis Female 6/3/1975 Blue\nBonk Radek Male 6/3/1975 Green\nBouillon Francis Male 6/3/1975 Blue\nSmith Steve Male 3/3/1985 Red")
+        end
+
+        it "sorts data by DOB then by last name" do
+            expect(sort_by_dob_then_last_name(@data)).to eq("Bonk Radek Male 6/3/1975 Green\nBouillon Francis Male 6/3/1975 Blue\nGrouillon Francis Female 6/3/1975 Blue\nSmith Steve Male 3/3/1985 Red")
+        end
+
+        it "sorts data by last name, descending" do
+            expect(sort_by_last_name_descending(@data)).to eq("Smith Steve Male 3/3/1985 Red\nGrouillon Francis Female 6/3/1975 Blue\nBouillon Francis Male 6/3/1975 Blue\nBonk Radek Male 6/3/1975 Green")
         end
     end
 
