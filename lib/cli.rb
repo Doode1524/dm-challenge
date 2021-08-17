@@ -46,13 +46,13 @@ class Cli
         @sort_method = get_input
         exit if @sort_method.downcase === 'exit'
         if (@sort_method == "1" || @sort_method == "2" || @sort_method == "3") 
-            parse(delimiter, @sort_method)
+            get_output_data(delimiter, @sort_method)
         else
             sort_options(@delimiter)
         end
     end
 
-    def parse(delimiter, sort_method)
+    def get_output_data(delimiter, sort_method)
         data = parse_comma_data if delimiter === "1"
         data = parse_space_data if delimiter === "2"
         data = parse_pipe_data  if delimiter === "3"

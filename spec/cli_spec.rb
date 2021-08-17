@@ -10,12 +10,24 @@ RSpec.describe Cli do
 
     context "parse_comma_data" do
 
+        before do
+            def parse_comma_data
+                file_input = "Abercrombie, Neil, Male, Tan, 2/13/1943
+                Bishop, Timothy, Male, Yellow, 4/23/1967
+                Kelly, Sue, Female, Pink, 7/12/1959"
+                parsed_input = file_input.split(", ").join(" ").split("\n")
+                parsed_input_array = parsed_input.map {|i| i.split(" ")}
+                reorder = parsed_input_array.each {|e| e.push(e.slice!(3))}
+                return reorder 
+            end
+        end
+
         it "has a parse_comma_data method" do
             expect{Cli.new.parse_comma_data}.to_not raise_error
         end
 
         it "correctly parses data" do
-            expect(Cli.new.parse_comma_data).to eq([["Abercrombie", "Neil", "Male", "2/13/1943", "Tan"],
+            expect(parse_comma_data).to eq([["Abercrombie", "Neil", "Male", "2/13/1943", "Tan"],
                 ["Bishop", "Timothy", "Male", "4/23/1967", "Yellow"],
                 ["Kelly", "Sue", "Female", "7/12/1959", "Pink"]])
         end
@@ -23,12 +35,24 @@ RSpec.describe Cli do
 
     context "parse_space_data" do
 
+        before do
+            def parse_space_data
+                file_input = "Kournikova Anna F F 6-3-1975 Red
+                Hingis Martina M F 4-2-1979 Green
+                Seles Monica H F 12-2-1973 Black"
+                parsed_input = file_input.split("\n")
+                parsed_input_array = parsed_input.map {|i| i.split(" ")}
+                reorder = parsed_input_array.each {|e| e.slice!(2)}
+                return reorder
+            end
+        end
+
         it "has a parse_space_data method" do
             expect{Cli.new.parse_space_data}.to_not raise_error
         end
 
         it "correctly parses data" do
-            expect(Cli.new.parse_space_data).to eq([["Kournikova", "Anna", "F", "6-3-1975", "Red"], 
+            expect(parse_space_data).to eq([["Kournikova", "Anna", "F", "6-3-1975", "Red"], 
                 ["Hingis", "Martina", "F", "4-2-1979", "Green"], 
                 ["Seles", "Monica", "F", "12-2-1973", "Black"]])
         end
@@ -36,12 +60,25 @@ RSpec.describe Cli do
 
     context "parse_pipe_data" do
 
+        before do
+            def parse_pipe_data
+                file_input = "Smith | Steve | D | M | Red | 3-3-1985
+                Bonk | Radek | S | M | Green | 6-3-1975
+                Bouillon | Francis | G | M | Blue | 6-3-1975
+                Grouillon | Francis | G | F | Blue | 6-3-1975"
+                parsed_input = file_input.split("| ").join(" ").split("\n")
+                parsed_input_array = parsed_input.map {|i| i.split(" ")}
+                reorder = parsed_input_array.each {|e| [e.slice!(2), e.push(e.slice!(3))]}
+                return reorder
+            end
+        end
+
         it "has a parse_pipe_data method" do
             expect{Cli.new.parse_pipe_data}.to_not raise_error
         end
 
         it "correctly parses data" do
-            expect(Cli.new.parse_pipe_data).to eq([["Smith", "Steve", "M", "3-3-1985", "Red"], ["Bonk", "Radek", "M", "6-3-1975", "Green"], 
+            expect(parse_pipe_data).to eq([["Smith", "Steve", "M", "3-3-1985", "Red"], ["Bonk", "Radek", "M", "6-3-1975", "Green"], 
                 ["Bouillon", "Francis", "M", "6-3-1975", "Blue"], 
                 ["Grouillon", "Francis", "F", "6-3-1975", "Blue"]])
         end
