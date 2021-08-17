@@ -105,6 +105,7 @@ class Cli
         sorted_data = formatted_data.sort_by {|e| [e[2], e[0]] }
         parsed_data = sorted_data.map {|e| e.join(" ")}
         output_data = parsed_data.join("\n")
+        binding.pry
         print_data(output_data)
     end
 

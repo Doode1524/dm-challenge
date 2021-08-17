@@ -61,4 +61,23 @@ RSpec.describe Cli do
         end
     end
 
+    context "sort methods" do
+        before do 
+            @data = [["Smith", "Steve", "Male", "3/3/1985", "Red"], ["Bonk", "Radek", "Male", "6/3/1975", "Green"], 
+            ["Bouillon", "Francis", "Male", "6/3/1975", "Blue"], 
+            ["Grouillon", "Francis", "Female", "6/3/1975", "Blue"]]
+
+            def sort_by_gender_then_last_name(data)
+                sorted_data = data.sort_by {|e| [e[2], e[0]] }
+                parsed_data = sorted_data.map {|e| e.join(" ")}
+                output_data = parsed_data.join("\n")
+                return output_data
+            end
+        end
+
+        it "sorts data by gender then by last name" do
+            expect(sort_by_gender_then_last_name(@data)).to eq("Grouillon Francis Female 6/3/1975 Blue\nBonk Radek Male 6/3/1975 Green\nBouillon Francis Male 6/3/1975 Blue\nSmith Steve Male 3/3/1985 Red")
+        end
+    end
+
 end
